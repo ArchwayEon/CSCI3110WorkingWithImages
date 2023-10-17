@@ -1,0 +1,42 @@
+﻿@model WorkingWithImages.Models.Entities.Image
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Image</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Upload" asp-controller="Image" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="files" class="control-label">Image file</label>
+                <input id="files" name="files" type="file" class="form-control" />
+                @if (Model != null)
+                {
+                    <img src="/Image/Details/@Model.Id" alt="@Model.Name image" width="40" height="60" />
+                }
+                <span id="filesMessages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
